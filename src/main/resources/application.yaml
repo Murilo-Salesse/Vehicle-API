@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: eventclean
+
+  datasource:
+    url: ${URL}
+    username: ${USER}
+    password: ${PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+  flyway:
+    enabled: true
+

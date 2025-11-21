@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: eventclean-db
+    environment:
+      POSTGRES_DB: eventclean
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - eventclean_data:/var/lib/postgresql/data
+    networks:
+      - eventclean-net
+
+  app:
+    build: .
+    container_name: eventclean-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: ${URL}
+      SPRING_DATASOURCE_USERNAME: ${USER}
+      SPRING_DATASOURCE_PASSWORD: ${PASSWORD}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - postgres
+    networks:
+      - eventclean-net
+
+volumes:
+  eventclean_data:
+
+networks:
+  eventclean-net:
