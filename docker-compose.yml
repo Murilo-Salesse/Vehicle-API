@@ -5,9 +5,9 @@ services:
     image: postgres:16
     container_name: eventclean-db
     environment:
-      POSTGRES_DB: eventclean
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${URL}
+      POSTGRES_USER: ${USER}
+      POSTGRES_PASSWORD: ${PASSWORD}
     ports:
       - "5433:5432"
     volumes:
